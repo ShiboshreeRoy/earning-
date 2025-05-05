@@ -1,0 +1,15 @@
+<h1 class="text-2xl font-bold mb-4">Your Earnings Dashboard</h1>
+
+<p class="mb-4">Total Income: <strong>$<%= @total_income %></strong></p>
+
+<%= link_to 'Add Income', new_income_path, class: "bg-blue-500 text-white px-4 py-2 rounded" %>
+
+<ul class="mt-4">
+  <% @incomes.each do |income| %>
+    <li class="py-2 border-b">
+      <strong><%= income.title %></strong>: $<%= income.amount %>
+      <%= link_to 'Edit', edit_income_path(income), class: "ml-2 text-blue-600" %> |
+      <%= link_to 'Delete', income, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-red-600" %>
+    </li>
+  <% end %>
+</ul>

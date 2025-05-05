@@ -47,7 +47,7 @@
             <i data-lucide="dollar-sign" class="w-4 h-4"></i> Income
           <% end %>
 
-          <%= link_to destroy_user_session_path, method: :delete, class: "hover:text-red-600 flex items-center gap-1" do %>
+          <%= link_to destroy_user_session_path, method: :delete, data: {turbo_method: :delete}, class: "hover:text-red-600 flex items-center gap-1" do %>
             <i data-lucide="log-out" class="w-4 h-4"></i> Logout
           <% end %>
         <% else %>

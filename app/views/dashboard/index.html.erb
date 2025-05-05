@@ -1,15 +1,32 @@
 <h1 class="text-2xl font-bold mb-4">Your Earnings Dashboard</h1>
 
-<p class="mb-4">Total Income: <strong>$<%= @total_income %></strong></p>
+<p class="mb-4">
+  Total Income: 
+  <strong>$<%= @total_income.present? ? sprintf('%.2f', @total_income) : '0.00' %></strong>
+</p>
 
-<%= link_to 'Add Income', new_income_path, class: "bg-blue-500 text-white px-4 py-2 rounded" %>
+<%= link_to new_income_path, class: "inline-flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" do %>
+  <i data-lucide="plus-circle" class="w-5 h-5"></i>
+  Add Income
+<% end %>
 
 <ul class="mt-4">
   <% @incomes.each do |income| %>
-    <li class="py-2 border-b">
-      <strong><%= income.title %></strong>: $<%= income.amount %>
-      <%= link_to 'Edit', edit_income_path(income), class: "ml-2 text-blue-600" %> |
-      <%= link_to 'Delete', income, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-red-600" %>
+    <li class="py-2 border-b flex justify-between items-center">
+      <div>
+        <strong><%= income.title %></strong>: $<%= sprintf('%.2f', income.amount) %>
+      </div>
+      <div class="flex items-center gap-2">
+        <%= link_to edit_income_path(income), class: "text-blue-600 hover:text-blue-800" do %>
+          <i data-lucide="edit-2" class="w-4 h-4"></i>
+          Edit
+        <% end %>
+        |
+        <%= link_to income, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-red-600 hover:text-red-800" do %>
+          <i data-lucide="trash" class="w-4 h-4"></i>
+          Delete
+        <% end %>
+      </div>
     </li>
   <% end %>
 </ul>

@@ -22,22 +22,56 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-  <nav class="bg-gray-200 p-4">
-  <% if user_signed_in? %>
-    Logged in as <strong><%= current_user.email %></strong> |
-    <%= link_to 'Dashboard', root_path %> |
-    <%= link_to 'Income', incomes_path %> |
-    <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
-  <% else %>
-    <%= link_to 'Login', new_user_session_path %> |
-    <%= link_to 'Sign Up', new_user_registration_path %>
-  <% end %>
-</nav>
-    <main class="container mx-auto mt-28 px-5 flex">
-   
+  <body class="bg-gray-50 text-gray-800 font-sans">
+  <!-- Navigation Bar -->
+  <nav class="bg-white shadow-md fixed w-full top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="text-xl font-bold text-blue-600 flex items-center gap-2">
+        <i data-lucide="wallet" class="w-6 h-6"></i>
+        EarnTrack
+      </div>
 
-      <%= yield %>
-    </main>
-  </body>
+      <div class="space-x-4 flex items-center text-sm font-medium">
+        <% if user_signed_in? %>
+          <span class="text-gray-600 flex items-center gap-1">
+            <i data-lucide="user" class="w-4 h-4"></i>
+            <%= current_user.email %>
+          </span>
+
+          <%= link_to root_path, class: "hover:text-blue-600 flex items-center gap-1" do %>
+            <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard
+          <% end %>
+
+          <%= link_to incomes_path, class: "hover:text-blue-600 flex items-center gap-1" do %>
+            <i data-lucide="dollar-sign" class="w-4 h-4"></i> Income
+          <% end %>
+
+          <%= link_to destroy_user_session_path, method: :delete, class: "hover:text-red-600 flex items-center gap-1" do %>
+            <i data-lucide="log-out" class="w-4 h-4"></i> Logout
+          <% end %>
+        <% else %>
+          <%= link_to new_user_session_path, class: "hover:text-blue-600 flex items-center gap-1" do %>
+            <i data-lucide="log-in" class="w-4 h-4"></i> Login
+          <% end %>
+
+          <%= link_to new_user_registration_path, class: "hover:text-green-600 flex items-center gap-1" do %>
+            <i data-lucide="user-plus" class="w-4 h-4"></i> Sign Up
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-5 mt-28">
+    <%= yield %>
+  </main>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+
 </html>

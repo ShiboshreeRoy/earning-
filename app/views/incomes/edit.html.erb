@@ -1,10 +1,25 @@
-<% content_for :title, "Editing income" %>
+<% content_for :title, "Editing Income" %>
 
-<div class="md:w-2/3 w-full">
-  <h1 class="font-bold text-4xl">Editing income</h1>
+<div class="max-w-2xl mx-auto mt-10  p-6">
+  <h1 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+    <i data-lucide="edit-3" class="w-6 h-6 text-blue-600"></i>
+    Editing Income
+  </h1>
 
+  <!-- Income Form -->
   <%= render "form", income: @income %>
 
-  <%= link_to "Show this income", @income, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= link_to "Back to incomes", incomes_path, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+  <!-- Action Links -->
+  <div class="mt-6 flex flex-col sm:flex-row gap-3">
+    <%= link_to @income, class: "flex items-center justify-center gap-2 w-full sm:w-auto rounded-md px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium shadow-sm" do %>
+      <i data-lucide="eye" class="w-4 h-4"></i>
+      Show this income
+    <% end %>
+
+    <%= link_to incomes_path, class: "flex items-center justify-center gap-2 w-full sm:w-auto rounded-md px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium shadow-sm" do %>
+      <i data-lucide="arrow-left" class="w-4 h-4"></i>
+      Back to incomes
+    <% end %>
+  </div>
 </div>
+

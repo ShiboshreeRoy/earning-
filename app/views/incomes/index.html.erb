@@ -26,17 +26,20 @@
         <div class="bg-white border border-gray-200 shadow-sm rounded-xl p-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <%= render income %>
           <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
-            <%= link_to income, class: "flex items-center justify-center gap-2 px-4 py-2 rounded-md bg-gray-100 hover:bg-gray-200 font-medium text-gray-700" do %>
-              <i data-lucide="eye" class="w-4 h-4"></i>
-              Show
-            <% end %>
-            <%= link_to edit_income_path(income), class: "flex items-center justify-center gap-2 px-4 py-2 rounded-md bg-gray-100 hover:bg-gray-200 font-medium text-gray-700" do %>
-              <i data-lucide="pencil" class="w-4 h-4"></i>
-              Edit
-            <% end %>
-            <%= button_to income, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "flex items-center justify-center gap-2 px-4 py-2 rounded-md bg-red-600 hover:bg-red-500 font-medium text-white" do %>
-              <i data-lucide="trash" class="w-4 h-4"></i>
-              Destroy
+            <% if income.user.email == current_user.email %> <!-- Fixed to use 'income' instead of '@income' -->
+              <%= link_to edit_income_path(income), class: "flex items-center justify-center gap-2 px-4 py-2 rounded-md bg-gray-100 hover:bg-gray-200 font-medium text-gray-700" do %>
+                <i data-lucide="pencil" class="w-4 h-4"></i>
+                Edit
+              <% end %>
+              <%= button_to income, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "flex items-center justify-center gap-2 px-4 py-2 rounded-md bg-red-600 hover:bg-red-500 font-medium text-white" do %>
+                <i data-lucide="trash" class="w-4 h-4"></i>
+                Destroy
+              <% end %>
+            <% else %>
+              <%= link_to incomes_path, class: "flex items-center justify-center gap-2 px-4 py-2 rounded-md bg-gray-100 hover:bg-gray-200 font-medium text-gray-700" do %>
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                Back to incomes
+              <% end %>
             <% end %>
           </div>
         </div>
